@@ -1,3 +1,7 @@
+# dataset
+data/*.csv
+data/*.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -109,7 +113,6 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
-data/*
 
 # other
 CMakeLists.txt.user

@@ -1,9 +1,8 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(tp2)
 
-#set(CMAKE_CXX_FLAGS "-Wall -Ofast -std=c++11 -I eigen ")
 
-set (CMAKE_CXX_STANDARD 14)
+set (CMAKE_CXX_STANDARD 11)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
 
@@ -19,8 +18,8 @@ IF(CMAKE_BUILD_TYPE MATCHES Release)
 ENDIF()
 
 # si se usa un virtual environment setearlo aca
-set(PYTHON_EXECUTABLE "python")
-# set(PYTHON_LIBRARY "/anaconda3/envs/metnum/lib/libpython3.6m.dylib")
+#set(PYTHON_EXECUTABLE "/anaconda3/envs/metnum/bin/python")
+#set(PYTHON_LIBRARY "/anaconda3/envs/metnum/lib/libpython3.6m.dylib")
 
 include_directories(eigen)
 

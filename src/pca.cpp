@@ -17,4 +17,5 @@ void PCA::fit(Matrix X)
 
 MatrixXd PCA::transform(SparseMatrix X)
 {
+  throw std::runtime_error("Sin implementar");
 }

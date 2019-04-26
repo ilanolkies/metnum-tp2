@@ -12,7 +12,11 @@ Necesitamos bajar las librerías `pybind` y `eigen` ("numpy" de C++), para eso b
 
 Versión de Python: 3.6.5
 
-
+0. Descomprimir datasets
+```
+cd data
+tar -xvf data.tgz
+```
 1. Bajar submódulos
 ```
 git submodule init
@@ -27,7 +31,9 @@ pip install -r requirements.txt
 cmake .
 make
 ```
-4. Correr jupyter notebooks
+4. Correr jupyter lab o notebook
 ```
+cd notebooks
 jupyter lab
+jupyter notebook
 ```
