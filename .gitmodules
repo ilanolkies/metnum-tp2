@@ -1,5 +1,5 @@
 [submodule "eigen-git-mirror"]
-	path = eigen-git-mirror
+	path = eigen
 	url = https://github.com/eigenteam/eigen-git-mirror
 [submodule "pybind11"]
 	path = pybind11
