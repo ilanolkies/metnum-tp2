@@ -68,19 +68,14 @@ jupyter notebook
 Ejecutar la primera celda del notebook `knn.ipynb` o seguir los siguientes pasos:
 
 
-1. Bajar submódulos
-```
-git submodule init
-git submodule update
-```
-2. Compilar el código C++ en un módulo de python
+- Compilar el código C++ en un módulo de python
 ```
 mkdir build
 cd build
 rm -rf *
 cmake -DPYTHON_EXECUTABLE="$(which python)" -DCMAKE_BUILD_TYPE=Release ..
 ```
-3. Al ejecutar el siguiente comando se compila e instala la librería en el directorio `notebooks`
+- Al ejecutar el siguiente comando se compila e instala la librería en el directorio `notebooks`
 ```
 make install
 ```

@@ -17,9 +17,9 @@ IF(CMAKE_BUILD_TYPE MATCHES Release)
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 ENDIF()
 
-# si se usa un virtual environment setearlo aca
-#set(PYTHON_EXECUTABLE "/anaconda3/envs/metnum/bin/python")
-#set(PYTHON_LIBRARY "/anaconda3/envs/metnum/lib/libpython3.6m.dylib")
+# si se usa un virtual environment setearlo aca o desde la consola
+#set(PYTHON_EXECUTABLE "/path/to/bin/python")
+#set(PYTHON_LIBRARY "/path/to/lib/libpytho.so")
 
 include_directories(eigen)
 
