@@ -17,6 +17,28 @@ Versión de Python: 3.6.5
 cd data
 tar -xvf data.tgz
 ```
+## Con pyenv
+
+```
+curl https://pyenv.run | bash
+```
+
+Luego, sugiere agregar unas líneas al bashrc. Hacer eso, **REINICIAR LA CONSOLA** y luego...
+
+```
+pyenv install 3.6.5
+pyenv global 3.6.5
+pyenv virtualenv 3.6.5 tp2
+
+# En el directorio del proyecto
+pyenv activate tp2
+pip install -r requirements.txt
+```
+0. Descomprimir datasets
+```
+cd data
+tar -xvf data.tgz
+```
 1. Bajar submódulos
 ```
 git submodule init
@@ -31,9 +53,12 @@ pip install -r requirements.txt
 cmake .
 make
 ```
-4. Correr jupyter lab o notebook
+4. Correr jupyter lab
 ```
 cd notebooks
 jupyter lab
+```
+o  notebook
+```
 jupyter notebook
 ```
