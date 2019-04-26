@@ -6,56 +6,54 @@ En `data/` están los datasets. Usaremos `imdb_small.csv` (6K de train, 6K de te
 
 En `src/` está el código de C++, en particular en `src/sentiment.cpp` está el entrypoint de pybind.
 
-En `notebooks/` hay ejemplos del TP hechos usando sklearn, otros implementaciones propias en Python y finalmente una usando la implementación en C++.
+En `notebooks/` hay ejemplos para correr partes del TP usando sklearn y usando la implementación en C++.
 
-Necesitamos bajar las librerías `pybind` y `eigen` ("numpy" de C++), para eso bajamos los submódulos en el primer paso.
+Necesitamos bajar las librerías `pybind` y `eigen` (el "numpy" de C++), para eso bajamos los submódulos como primer paso.
 
-Versión de Python: 3.6.5
+Versión de Python >= 3.6.5
 
-```
-## Con pyenv
+
+## Creación de un entorno virtual de python
+
+### Con pyenv
 
 ```
 curl https://pyenv.run | bash
 ```
 
-Luego, sugiere agregar unas líneas al bashrc. Hacer eso, **REINICIAR LA CONSOLA** y luego...
+Luego, se sugiere agregar unas líneas al bashrc. Hacer eso, **REINICIAR LA CONSOLA** y luego...
 
 ```
 pyenv install 3.6.5
 pyenv global 3.6.5
 pyenv virtualenv 3.6.5 tp2
+```
 
-# En el directorio del proyecto
+En el directorio del proyecto
+
+```
 pyenv activate tp2
 ```
 
-## Con Conda
+### Directamente con python3
+```
+python3 -m venv tp2
+source tp2/bin/activate
+```
+
+### Con Conda
 ```
 conda create --name tp2 python=3.6.5
 conda activate tp2
 ```
 
-0. Descomprimir datasets
-```
-cd data
-tar -xvf data.tgz
-```
-1. Bajar submódulos
-```
-git submodule init
-git submodule update
-```
-2. Instalar dependencias
+## Instalación de las depencias
 ```
 pip install -r requirements.txt
 ```
-3. Compilar
-```
-cmake .
-make
-```
-4. Correr jupyter lab
+
+## Correr notebooks de jupyter
+
 ```
 cd notebooks
 jupyter lab
@@ -63,4 +61,25 @@ jupyter lab
 o  notebook
 ```
 jupyter notebook
+```
+
+
+## Compilación
+Ejecutar la primera celda del notebook `knn.ipynb` o seguir los siguientes pasos:
+
+
+1. Bajar submódulos
+```
+git submodule init
+git submodule update
+```
+2. Compilar el código C++ en un módulo de python
+```
+cd build
+rm -rf *
+cmake -DPYTHON_EXECUTABLE="$(which python)" -DCMAKE_BUILD_TYPE=Release ..
+```
+3. Al ejecutar el siguiente comando se compila e instala la librería en el directorio `notebooks`
+```
+make install
 ```
