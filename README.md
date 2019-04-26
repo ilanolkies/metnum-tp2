@@ -12,10 +12,6 @@ Necesitamos bajar las librerías `pybind` y `eigen` ("numpy" de C++), para eso b
 
 Versión de Python: 3.6.5
 
-0. Descomprimir datasets
-```
-cd data
-tar -xvf data.tgz
 ```
 ## Con pyenv
 
@@ -34,6 +30,9 @@ pyenv virtualenv 3.6.5 tp2
 pyenv activate tp2
 pip install -r requirements.txt
 ```
+
+
+
 0. Descomprimir datasets
 ```
 cd data
