@@ -75,6 +75,7 @@ git submodule update
 ```
 2. Compilar el código C++ en un módulo de python
 ```
+mkdir build
 cd build
 rm -rf *
 cmake -DPYTHON_EXECUTABLE="$(which python)" -DCMAKE_BUILD_TYPE=Release ..
