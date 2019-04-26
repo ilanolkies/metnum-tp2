@@ -28,10 +28,13 @@ pyenv virtualenv 3.6.5 tp2
 
 # En el directorio del proyecto
 pyenv activate tp2
-pip install -r requirements.txt
 ```
 
-
+## Con Conda
+```
+conda create --name tp2 python=3.6.5
+conda activate tp2
+```
 
 0. Descomprimir datasets
 ```
