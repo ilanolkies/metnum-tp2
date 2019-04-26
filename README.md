@@ -12,6 +12,23 @@ Necesitamos bajar las librerías `pybind` y `eigen` ("numpy" de C++), para eso b
 
 Versión de Python: 3.6.5
 
+## Con pyenv
+
+```
+curl https://pyenv.run | bash
+```
+
+Luego, sugiere agregar unas líneas al bashrc. Hacer eso, **REINICIAR LA CONSOLA** y luego...
+
+```
+pyenv install 3.6.5
+pyenv global 3.6.5
+pyenv virtualenv 3.6.5 tp2
+
+# En el directorio del proyecto
+pyenv activate tp2
+pip install -r requirements.txt
+```
 
 1. Bajar submódulos
 ```
