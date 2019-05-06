@@ -40,3 +40,25 @@ set(CMAKE_INSTALL_PREFIX
 message(CMAKE_INSTALL_PREFIX = "${CMAKE_INSTALL_PREFIX}")
 
 install(TARGETS sentiment DESTINATION ${CMAKE_INSTALL_PREFIX}/notebooks)
+
+
+
+# si se quiere hacer un ejecutable "tp2" que incluya pybind11, utilizar las
+# siguientes 3 instrucciones de cmake.
+
+include_directories(pybind11/include)
+
+add_executable(tp2_pybind
+        src/main_pybind.cpp
+        src/knn.cpp
+        src/pca.cpp
+        src/eigen.cpp)
+
+target_link_libraries(tp2_pybind PRIVATE pybind11::embed)
+
+# sino hacer lo siguiente manteniendo las dependencias por separado
+add_executable(tp2
+        src/main.cpp
+        src/knn.cpp
+        src/pca.cpp
+        src/eigen.cpp)
