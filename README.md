@@ -23,7 +23,7 @@ pip install -r requirements.txt
 ```
 3. Compilar
 ```
-cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make clean && make && make install
+mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make clean && make && make install
 ```
 4. Correr jupyter notebooks
 ```
