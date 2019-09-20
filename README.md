@@ -12,6 +12,23 @@ Necesitamos bajar las librerías `pybind` y `eigen` (el "numpy" de C++), para es
 
 Versión de Python >= 3.6.5
 
+1. Bajar submódulos
+```
+git submodule init
+git submodule update
+```
+2. Instalar dependencias
+```
+pip install -r requirements.txt
+```
+3. Compilar
+```
+cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make clean && make && make install
+```
+4. Correr jupyter notebooks
+```
+jupyter lab
+```
 
 ## Creación de un entorno virtual de python
 
@@ -79,3 +96,25 @@ cmake -DPYTHON_EXECUTABLE="$(which python)" -DCMAKE_BUILD_TYPE=Release ..
 ```
 make install
 ```
+
+## Prueba de clasificación
+
+1. Compilar la librería
+
+```
+cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make clean && make && make install
+```
+
+2. Correr clasificación sobre sample
+
+```
+python bin/classify.py data/test_sample.csv data/test_sample.out
+```
+
+3. Correr evaluación
+
+```
+python bin/evaluate.py data/test_sample.out data/test_sample.true
+```
+
+
