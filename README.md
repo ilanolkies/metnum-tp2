@@ -2,12 +2,37 @@
 
 ## Instrucciones
 
-En `data/` están los datasets. Usaremos `imdb_small.csv` (6K de train, 6K de test).
+
+### Clonar Repo
+
+NO HACER FORK! 
+
+Primero, crearse un repo en algún otro lugar. Luego, clonar este repo de la siguiente manera:
+
+```
+git clone git@github.com:finiteautomata/metnum-tp2-20192c.git
+```
+
+Cambiar el repositorio al que hayamos creado
+
+```
+git remote remove origin
+git remote add origin <nuestra-nueva-url-de-git>
+```
+
+Listo. Ya pueden disfrutar del TP2
+
+### Datos
+
+En `data/` tenemos que descomprimir el dataset de IMDB, que lo pueden [bajar de acá](https://campus.exactas.uba.ar/pluginfile.php/143556/course/section/19842/imdb.tar.gz)
+
+### Otros directorios
 
 En `src/` está el código de C++, en particular en `src/sentiment.cpp` está el entrypoint de pybind.
 
 En `notebooks/` hay ejemplos para correr partes del TP usando sklearn y usando la implementación en C++.
 
+### Submódulos y librerías necesarias
 Necesitamos bajar las librerías `pybind` y `eigen` (el "numpy" de C++), para eso bajamos los submódulos como primer paso.
 
 Versión de Python >= 3.6.5
@@ -21,6 +46,7 @@ git submodule update
 ```
 pip install -r requirements.txt
 ```
+
 3. Compilar
 ```
 mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make clean && make && make install
