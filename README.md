@@ -24,7 +24,8 @@ Listo. Ya pueden disfrutar del TP2
 
 ### Datos
 
-En `data/` tenemos que descomprimir el dataset de IMDB, que lo pueden [bajar de acá](https://campus.exactas.uba.ar/pluginfile.php/143556/course/section/19842/imdb.tar.gz)
+En `data/` tenemos que descomprimir el dataset de IMDB, que lo pueden [bajar de acá](https://campus.exactas.uba.ar/pluginfile.php/143556/course/section/19842/imdb.tar.gz) y reconombrar la
+extensión a .tgz
 
 ### Otros directorios
 
@@ -32,29 +33,6 @@ En `src/` está el código de C++, en particular en `src/sentiment.cpp` está el
 
 En `notebooks/` hay ejemplos para correr partes del TP usando sklearn y usando la implementación en C++.
 
-### Submódulos y librerías necesarias
-Necesitamos bajar las librerías `pybind` y `eigen` (el "numpy" de C++), para eso bajamos los submódulos como primer paso.
-
-Versión de Python >= 3.6.5
-
-1. Bajar submódulos
-```
-git submodule init
-git submodule update
-```
-2. Instalar dependencias
-```
-pip install -r requirements.txt
-```
-
-3. Compilar
-```
-mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make clean && make && make install
-```
-4. Correr jupyter notebooks
-```
-jupyter lab
-```
 
 ## Creación de un entorno virtual de python
 
@@ -109,6 +87,17 @@ jupyter notebook
 
 ## Compilación
 Ejecutar la primera celda del notebook `knn.ipynb` o seguir los siguientes pasos:
+
+### Submódulos y librerías necesarias
+Necesitamos bajar las librerías `pybind` y `eigen` (el "numpy" de C++), para eso bajamos los submódulos como primer paso.
+
+Versión de Python >= 3.6.5
+
+Para bajar submódulos ejecutar:
+```
+git submodule init
+git submodule update
+```
 
 
 - Compilar el código C++ en un módulo de python
