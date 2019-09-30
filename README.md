@@ -24,12 +24,11 @@ Listo. Ya pueden disfrutar del TP2
 
 ### Datos
 
-En `data/` tenemos que descomprimir el dataset de IMDB, que lo pueden [bajar de acá](https://campus.exactas.uba.ar/pluginfile.php/143556/course/section/19842/imdb.tar.gz) y reconombrar la
-extensión a .tgz
+En `data/` tenemos que descomprimir el dataset de IMDB, que lo pueden [bajar de acá](https://campus.exactas.uba.ar/pluginfile.php/143556/course/section/19842/imdb.tar.gz)
 
 ### Otros directorios
 
-En `src/` está el código de C++, en particular en `src/sentiment.cpp` está el entrypoint de pybind.
+En `src/` está el código de C++, en particular en `src/sentiment.cpp` está el entry-point de pybind.
 
 En `notebooks/` hay ejemplos para correr partes del TP usando sklearn y usando la implementación en C++.
 
