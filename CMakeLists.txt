@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(tp2)
 
-set (CMAKE_CXX_STANDARD 14)
+set (CMAKE_CXX_STANDARD 11)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
 
@@ -17,13 +17,13 @@ IF(CMAKE_BUILD_TYPE MATCHES Release)
 ENDIF()
 
 # si se usa un virtual environment setearlo aca
-#set(PYTHON_EXECUTABLE "/anaconda3/envs/metnum/bin/python")
-#set(PYTHON_LIBRARY "/anaconda3/envs/metnum/lib/libpython3.6m.dylib")
+#set(PYTHON_EXECUTABLE "/path/to/bin/python")
+#set(PYTHON_LIBRARY "/path/to/lib/libpytho.so")
 
-# Prender y apagar este flga para soporte OpenMP
+# Prender y apagar este flag para soporte OpenMP
 #set(USE_OpenMP ON)
 # Script cmake ``multi-plataforma`` (testeado en MacOS y Ubuntu)
-#include(OpenMP.cmake)
+#include(cmake/OpenMP.cmake)
 
 include_directories(eigen)
 
@@ -36,9 +36,9 @@ pybind11_add_module(sentiment
                     src/eigen.cpp)
 
 # Por cada módulo que use OpenMP ponerlo como dependencia de esta forma
-target_link_libraries(sentiment)#LINK_PUBLIC OpenMP::OpenMP_CXX)
+#target_link_libraries(sentiment LINK_PUBLIC OpenMP::OpenMP_CXX)
 
-# This variable is used to locate the bin directory where the application will be installed
+# Esta variable se usa para fijar el directorio de instalación
 set(CMAKE_INSTALL_PREFIX
         ${PROJECT_SOURCE_DIR}
         CACHE PATH "Python custom modules directory" FORCE)
@@ -46,3 +46,25 @@ set(CMAKE_INSTALL_PREFIX
 message(CMAKE_INSTALL_PREFIX = "${CMAKE_INSTALL_PREFIX}")
 
 install(TARGETS sentiment DESTINATION ${CMAKE_INSTALL_PREFIX}/notebooks)
+
+# Crear un binario para testing manteniendo las dependencias de python por separado
+add_executable(tp2
+        src/main.cpp
+        src/knn.cpp
+        src/pca.cpp
+        src/eigen.cpp)
+
+
+# si se quiere hacer un ejecutable "tp2" que incluya pybind11, utilizar las
+# siguientes 3 instrucciones de cmake.
+
+#include_directories(pybind11/include)
+
+#add_executable(tp2_pybind
+#        src/main_pybind.cpp
+#        src/knn.cpp
+#        src/pca.cpp
+#        src/eigen.cpp)
+#
+#target_link_libraries(tp2_pybind PRIVATE pybind11::embed)
+
