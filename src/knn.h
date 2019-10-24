@@ -3,6 +3,7 @@
 #include "types.h"
 
 
+
 class KNNClassifier {
 public:
     KNNClassifier(unsigned int n_neighbors);
@@ -11,4 +12,19 @@ public:
 
     Vector predict(SparseMatrix X);
 private:
+	unsigned int k;
+	SparseMatrix matrizX;
+	Matrix matrizY;
+
+	bool predecirFila(SparseMatrix &X, int fila);
+
+
+};
+	
+struct cercano
+{
+	double distancia;
+	bool resenia;
+
+
 };
