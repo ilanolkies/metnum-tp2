@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
   _title = 'k vs. accuaracy' if alpha == 0 else 'k vs. accuaracy - Alpha = {0}'.format(alpha)
   ax.set(xlabel='k', ylabel='accuaracy',
-        title='k vs. accuaracy')
+        title=_title)
   ax.grid()
 
   fig.savefig("results/k_vs_accuaracy_{0}.png".format(time.strftime("%Y%m%d-%H%M%S")))
