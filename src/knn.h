@@ -26,5 +26,10 @@ struct cercano
 	double distancia;
 	bool resenia;
 
+	bool operator<(const struct cercano& other) const
+    {
+        return other.distancia < distancia;
+    }
+
 
 };

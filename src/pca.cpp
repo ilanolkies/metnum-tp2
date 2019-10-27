@@ -57,21 +57,6 @@ MatrixXd PCA::transform(SparseMatrix X)
 	}
 	
 	return res;
-	
-	
-	
-	/*
-	
-	fit(X); //hay que ver si esto anda, no sé bien cómo están implementadas las matrices.
-	//si no, rellenar matriz con ceros? parece demasiado
-	
-	
-	MatrixXd res; 
-	for(int i = 0; i < X.size(); i++){
-		res.push_back(tc(i, X, get<1>(eigenV)));
-	}
-	return res;
-	*/
 }
 
 Vector PCA::tc(Vector f, Matrix eigen){
@@ -89,4 +74,3 @@ Vector PCA::tc(Vector f, Matrix eigen){
 }
 
 
-//MatrixXd matriz dinámica double
