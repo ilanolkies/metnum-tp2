@@ -9,4 +9,11 @@ public:
 
     Eigen::MatrixXd transform(SparseMatrix X);
 private:
+	unsigned int alpha;
+	
+	Vector tc(Vector f, Matrix eigen);
+
+	//Matrix matrizX;
+	Matrix covarianza;
+
 };
