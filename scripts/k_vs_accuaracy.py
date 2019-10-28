@@ -110,7 +110,7 @@ def main(args):
 	ax.plot(its, accs)
 
 	_title = 'k vs. accuracy' if alpha == 0 else 'k vs. accuracy - Alpha = {0}'.format(alpha)
-	ax.set(xlabel='k', ylabel='accuracy',title='k vs. accuracy')
+	ax.set(xlabel='k', ylabel='accuracy',title='title=_title')
 	ax.grid()
 
 	fig.savefig("results/k_vs_accuaracy_{0}.png".format(time.strftime("%Y%m%d-%H%M%S")))
@@ -131,6 +131,7 @@ def positive_integer(value):
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
 
 	description = 'Versión del laboratorio de AED III del juego cuatro en linea para el TP3.'
 	parser = argparse.ArgumentParser(description=description)
@@ -172,88 +173,3 @@ if __name__ == '__main__':
 
 	main(args)
 
-
-
-	'''
-	Obteniendo parametros para test
-	'''
-	#its = np.logspace(1, 100)
-
-	#if len(sys.argv) > 3:
-	#	its = np.logspace(float(sys.argv[1]), float(sys.argv[2]), num = int(sys.argv[3]))
-	#elif len(sys.argv) > 1:
-	#	its = np.logspace(float(sys.argv[1]), float(sys.argv[2]))
-
-	#main(argv)
-
-
-	#if len(sys.argv < 3):
-	#	its = np.arange(float(sys.argv[1], ))
-
-	#its = [int(i) for i in its]
-
-	#alpha = int(sys.argv[4]) if len(sys.argv) > 4 else 0
-
-	'''
-	Obteniendo datasets
-	'''
-	#df = pd.read_csv("data/imdb_small.csv")
-
-	#recortando data set para pruebas chiquitas
-	#df = df[:400]
-
-	'''
-	Vectorizacion
-	'''
-	#print("vectorizacion")
-
-	#X_train, y_train, X_test, y_test = get_instances(df)
-	
-	'''
-	Procesando PCA
-	'''
-	#print("PCA")
-	#if (alpha > 0):
-	#	pca = PCA(alpha)
-		
-	#	pca.fit(X_train.toarray())
-
-	#	X_train = pca.transform(X_train)
-	#	print(X_train)
-	#	X_test = pca.transform(X_test)
-		#print(X_train)
-
-
-	#accs = []
-
-
-
-	'''
-	El experimetno, iterando en k
-	'''
-	#print("KNN")
-	#for k in its:
-	#	print('K: {0}'.format(k))
-		
-		#Entrenamos KNN
-	#	clf = KNNClassifier(k)
-	#	clf.fit(X_train, y_train)
-	#	print("fin entrenamiento")
-		#Testeamos
-	#	y_pred = clf.predict(X_test)
-
-	#	print("a")
-	#	acc = accuracy_score(y_test, y_pred)
-	#	accs.append(acc)
-
-	#print("KNN finalizado")
-
-	#fig, ax = plt.subplots()
-	#ax.plot(its, accs)
-
-	#_title = 'k vs. accuracy' if alpha == 0 else 'k vs. accuracy - Alpha = {0}'.format(alpha)
-	#ax.set(xlabel='k', ylabel='accuracy',title='k vs. accuracy')
-	#ax.grid()
-
-	#fig.savefig("results/k_vs_accuaracy_{0}.png".format(time.strftime("%Y%m%d-%H%M%S")))
-	#plt.show()

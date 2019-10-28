@@ -136,3 +136,4 @@ cmake-build-release
 # Otros
 data/*
 results/*.png
+results/*.out
