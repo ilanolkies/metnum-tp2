@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
     B -= 2 * v * v.transpose();
     Eigen::Matrix<double, 5, 5 > M;
     M = B.transpose() * D * B;
-<<<<<<< Updated upstream
+
 
     Eigen::VectorXd expected(5);
     expected << 5, 4, 3, 2, 1;
