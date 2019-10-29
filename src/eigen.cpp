@@ -25,11 +25,12 @@ pair<double, Vector> power_iteration(const Matrix& X, unsigned num_iter, double 
     xk = w;
   }
 
-  // xk es autovector, y esta normalizado
-  _xk = X * xk;
+
+
 
   // _xk esmmultiplo de xk
-  double eigenvalue = _xk[0] * xk[0];
+  double eigenvalue = xk.transpose()*X * xk;
+  eigenvalue /= (pow(xk.norm(),2));
 
   return make_pair(eigenvalue, xk);
 }

@@ -1,4 +1,4 @@
-#include <iostream>
+	#include <iostream>
 #include "pca.h"
 #include "eigen.h"
 
@@ -34,13 +34,15 @@ MatrixXd PCA::transform(SparseMatrix X)
 	pair<Vector, Matrix> eigenV = get_first_eigenvalues(covarianza, alpha);
 
 	Matrix eigen = eigenV.second;
-	MatrixXd res(eigen.rows(), alpha);
-
+	MatrixXd res(denseX.rows(), alpha);
+	
 	// calculamos la transformacion carcteristica de cada fila
-	for(int i = 0; i < denseX.rows(); i++) {
+	int i = 0;
+	for(; i < denseX.rows(); i++) {
 		Vector row = denseX.row(i).head(alpha);
 		res.row(i) = tc(row, eigen);
 	}
+
 
 	return res;
 }

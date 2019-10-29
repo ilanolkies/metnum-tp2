@@ -14,7 +14,7 @@ private:
 	SparseMatrix matrizX;
 	Matrix matrizY;
 
-	bool predecirFila(SparseMatrix &X, int fila);
+	uint predecirFila(SparseMatrix &X, int fila);
 };
 
 struct cercano
