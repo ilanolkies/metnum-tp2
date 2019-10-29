@@ -137,3 +137,4 @@ cmake-build-release
 data/*
 results/*.png
 results/*.out
+results/*.txt

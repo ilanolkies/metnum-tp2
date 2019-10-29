@@ -3,41 +3,45 @@
 #include "eigen.h"
 #include <fstream>
 #include <ctime>
+#include <sstream>
+#include <string>
 
 using namespace std;
 
 int main(int argc, char** argv) {
-    Eigen::Matrix<double, 5, 5> D;
-    D << 5.0, 0.0, 0.0, 0.0, 0.0,
-    0.0, 4.0, 0.0, 0.0, 0.0,
-    0.0, 0.0, 3.0, 0.0, 0.0,
-    0.0, 0.0, 0.0, 2.0, 0.0,
-    0.0, 0.0, 0.0, 0.0, 1.0;
+    string line;
 
-    Eigen::VectorXd v(5);
-    v(0) = 1;
-    v(1) = 1;
-    v(2) = 1;
-    v(3) = 1;
-    v(4) = 1;
-    v = v / v.norm();
+    // matrix de covarianza
+    ifstream con_input("../results/predict_cov_matrix.txt");
 
-    Eigen::Matrix<double, 5, 5 > B;
-    B << 1.0, 0.0, 0.0, 0.0, 0.0,
-    0.0, 1.0, 0.0, 0.0, 0.0,
-    0.0, 0.0, 1.0, 0.0, 0.0,
-    0.0, 0.0, 0.0, 1.0, 0.0,
-    0.0, 0.0, 0.0, 0.0, 1.0;
+    Eigen::Matrix<double, 100, 100> M;
 
-    B -= 2 * v * v.transpose();
-    Eigen::Matrix<double, 5, 5 > M;
-    M = B.transpose() * D * B;
+    while(getline(con_input, line)) {
+        vector<int> lineData;
+        stringstream lineStream(line);
 
+        double value;
+        while(lineStream >> value)
+            M << value;
+    }
 
-    Eigen::VectorXd expected(5);
-    expected << 5, 4, 3, 2, 1;
+    // autovalores esperados
+    ifstream eigen_input("../results/predict_eigen_v.txt");
 
-    ofstream myfile("results/met-pot-it-errors.out");
+    Vector expected(100);
+
+    while(getline(eigen_input, line)) {
+        vector<int> lineData;
+        stringstream lineStream(line);
+
+        double value;
+        while(lineStream >> value) {
+            expected << value;
+        }
+    }
+
+    ofstream myfile("../results/met-pot-it-errors.out");
+
     if (!myfile.is_open()) {
         cerr << "Unable to open file";
         return 1;
@@ -55,8 +59,8 @@ int main(int argc, char** argv) {
 
     myfile.close();
 
+    ofstream myfile2("../results/met-pot-eps-errors.out");
 
-    ofstream myfile2("results/met-pot-eps-errors.out");
     if (!myfile2.is_open()) {
         cerr << "Unable to open file";
         return 1;
@@ -75,13 +79,3 @@ int main(int argc, char** argv) {
 
     return 0;
 }
-
-/*
-=======
-    auto t = get_first_eigenvalues(M, 5, 10000);
-    std::cout << t.first << std::endl;   //debería dar [5, 4, 3, 2, 1]
-    std::cout << t.second << std::endl;   //debería quedar -0.6 en la diagonal y 0.4 en el resto
-
-        
->>>>>>> Stashed changes
-*/
