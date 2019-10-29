@@ -72,6 +72,11 @@ int main(int argc, char** argv) {
 
     myfile2.close();
 
+
+    return 0;
+}
+
+/*
 =======
     auto t = get_first_eigenvalues(M, 5, 10000);
     std::cout << t.first << std::endl;   //debería dar [5, 4, 3, 2, 1]
@@ -79,5 +84,4 @@ int main(int argc, char** argv) {
 
         
 >>>>>>> Stashed changes
-    return 0;
-}
+*/
