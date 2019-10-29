@@ -22,17 +22,14 @@ void KNNClassifier::fit(SparseMatrix X, Matrix y)
 Vector KNNClassifier::predict(SparseMatrix X)
 {
   auto result = Vector(X.rows());
-  cout << X.cols() <<"  " << X.rows() << endl; 
-  cout << X.outerSize() << endl; 
 
-  cout << matrizX.cols() << "   " << matrizX.rows();
   for (int i = 0; i < X.rows(); i++)
     result(i) = predecirFila(X, i);
 
   return result;
 }
 
-bool KNNClassifier::predecirFila(SparseMatrix &X, int fila){
+uint KNNClassifier::predecirFila(SparseMatrix &X, int fila){
   // min heap para almacenar las distancias, asociadas con la reseña
   priority_queue<cercano> queue;
 
@@ -87,9 +84,8 @@ bool KNNClassifier::predecirFila(SparseMatrix &X, int fila){
       if (a.resenia)
         positivas++;
 
-      cout << "distancia" << a.distancia << endl;
       queue.pop();
     }
 
-  return positivas * 2 >= k;
+  return positivas * 2 >= k ? 1 : 0;
 }
