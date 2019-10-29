@@ -2,6 +2,7 @@
 #include "pca.h"
 #include "eigen.h"
 #include <fstream>
+#include <ctime>
 
 using namespace std;
 
@@ -42,10 +43,14 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    for (uint i = 100; i <= 10000; i+=100) {
-        auto t = get_first_eigenvalues(M, 5, i, 0.0000000001);
+    unsigned t0, t1;
 
-        myfile << i << "," << (t.first - expected).norm() << endl;
+    for (uint i = 100; i <= 10000; i+=100) {
+        t0 = clock();
+        auto t = get_first_eigenvalues(M, 5, i, 0.0000000001);
+        t1 = clock();
+
+        myfile << i << "," << (t.first - expected).norm() << "," << (t0-t1) << endl;
     }
 
     myfile.close();
@@ -58,9 +63,11 @@ int main(int argc, char** argv) {
     }
 
     for (double i = 0.001; i >= 0.000000000000000001; i/=10) {
+        t0 = clock();
         auto t = get_first_eigenvalues(M, 5, 1000, i);
+        t1 = clock();
 
-        myfile2 << i << "," << (t.first - expected).norm() << endl;
+        myfile2 << i << "," << (t.first - expected).norm() << "," << (t0-t1) << endl;
     }
 
     myfile2.close();
