@@ -20,7 +20,7 @@ void PCA::fit(Matrix X)
 	mu = mu/filas;
 	
 	
-	Vector iesima;
+	Vector iesima(X.cols());
 	
 	Matrix res(X.rows(), X.cols());
 	for(int i = 0; i < filas; i++){
@@ -80,9 +80,7 @@ Vector PCA::tc(Vector &f, Matrix &eigen){
 	
 	for(unsigned int i = 0; i < alpha; i++){
 		Vector vec = eigen.col(i);
-
-		auto a = vec.dot(f);
-		res(i) = a;
+		res(i) = vec.dot(f);
 	}
 	
 	
