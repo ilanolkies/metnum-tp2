@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 PCA::PCA(unsigned int n_components)
 {
 	alpha = n_components;
@@ -12,79 +11,46 @@ PCA::PCA(unsigned int n_components)
 
 void PCA::fit(Matrix X)
 {
+	int n = X.rows();
 
-
-	int filas = X.rows();
-	
 	Vector mu = X.rowwise().sum();
-	mu = mu/filas;
-	
-	
+	mu = mu / n;
+
 	Vector iesima(X.cols());
-	
+
 	Matrix res(X.rows(), X.cols());
-	for(int i = 0; i < filas; i++){
-		iesima = X.row(i);
-		iesima = iesima - mu;
-		iesima = iesima/sqrt(filas - 1);
-		res.row(i) = iesima;
-	}
 
+	for(int i = 0; i < n; i++)
+		res.row(i) = (X.row(i) - mu) / sqrt(n - 1);
 
-	covarianza = (res.transpose())*res; 
-
+	covarianza = (res.transpose())*res;
 }
-
 
 MatrixXd PCA::transform(SparseMatrix X)
 {
 	Matrix denseX = Matrix(X);
-	//fit(denseX);
-	
 
-
-	pair<Vector, Matrix> eigenV = get_first_eigenvalues(covarianza, alpha); //definir esos dos valores
-	//Devuelve vector de los alpha autovalores de mayor valor absoluto con sus autovectores asociados.
-	//Autovectores son las columnas de la matriz X. 
-	//ordenados por valor absoluto -> de mayor a menor.
-
-
+	// obtenemos alpha autovalores para calcular la transformacion caracteristica
+	pair<Vector, Matrix> eigenV = get_first_eigenvalues(covarianza, alpha);
 
 	Matrix eigen = eigenV.second;
 	MatrixXd res(eigen.rows(), alpha);
 
-	cout << eigen.rows() << " " << eigen.cols() << endl;
-
-	//cout << eigen << endl;
-	for(int i = 0; i < denseX.rows(); i++){
-		Vector filai = denseX.row(i).head(alpha);
-
-		res.row(i) = tc(filai, eigen);
-		
-		Vector a = Vector(alpha);
-		
-
-		res.row(i) = a;
-
-		
-
-		
+	// calculamos la transformacion carcteristica de cada fila
+	for(int i = 0; i < denseX.rows(); i++) {
+		Vector row = denseX.row(i).head(alpha);
+		res.row(i) = tc(row, eigen);
 	}
 
-	cout << "res:" << res.rows() << "  " << res.cols() << endl; 
 	return res;
 }
 
-Vector PCA::tc(Vector &f, Matrix &eigen){
+Vector PCA::tc(Vector &f, Matrix &eigen) {
 	Vector res = Vector(alpha);
-	
-	for(unsigned int i = 0; i < alpha; i++){
-		Vector vec = eigen.col(i);
-		res(i) = vec.dot(f);
-	}
-	
-	
-	
+
+	for(unsigned int i = 0; i < alpha; i++)
+		res(i) = eigen.col(i).dot(f);
+
 	return res;
 }
 
