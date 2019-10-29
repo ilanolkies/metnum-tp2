@@ -38,7 +38,7 @@ Vector KNNClassifier::predict(SparseMatrix X)
 	{ 
 		
 		ret(i) = predecirFila(X, i);
-		printf("%d\n",i );
+		//printf("%d\n",i );
 	}
 
 	return ret;
@@ -62,7 +62,7 @@ bool KNNClassifier::predecirFila(SparseMatrix &X, int fila){
 
 
 		//Recorro ambos iteradores hasta el final
-		while(it || it_interno){
+		while(it && it_interno){
 
 			//Mientras el indice de it es menor entonces no existe ese indice en la otra matriz por lo tanto su valor es 0
 			while(it.index() < it_interno.index()){
@@ -80,16 +80,14 @@ bool KNNClassifier::predecirFila(SparseMatrix &X, int fila){
 			}
 
 			//Si los indices son iguales, la distancia es igual al absoluto de la resta entre ambos valores
-			if(it_interno.index() == it.index() ){
+			if(it && it_interno &&  it_interno.index() == it.index() ){
 				distancia += abs( (it.value()-it_interno.value()) );
 				++it_interno;
 				++it;
 
 			}
-
-
-
 		}
+
 
 
 
@@ -113,6 +111,7 @@ bool KNNClassifier::predecirFila(SparseMatrix &X, int fila){
 			}
 
 			queue.pop();
+			cout << "distancia:" << k << " "<<a.distancia << endl;
 		}	
 
 

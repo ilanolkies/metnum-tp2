@@ -31,6 +31,7 @@ int main(int argc, char** argv) {
     B -= 2 * v * v.transpose();
     Eigen::Matrix<double, 5, 5 > M;
     M = B.transpose() * D * B;
+<<<<<<< Updated upstream
 
     Eigen::VectorXd expected(5);
     expected << 5, 4, 3, 2, 1;
@@ -64,5 +65,12 @@ int main(int argc, char** argv) {
 
     myfile2.close();
 
+=======
+    auto t = get_first_eigenvalues(M, 5, 10000);
+    std::cout << t.first << std::endl;   //debería dar [5, 4, 3, 2, 1]
+    std::cout << t.second << std::endl;   //debería quedar -0.6 en la diagonal y 0.4 en el resto
+
+        
+>>>>>>> Stashed changes
     return 0;
 }

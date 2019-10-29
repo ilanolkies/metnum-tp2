@@ -131,9 +131,9 @@ def positive_integer(value):
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
 
-	description = 'Versión del laboratorio de AED III del juego cuatro en linea para el TP3.'
+
+	description = 'Acuraccy.'
 	parser = argparse.ArgumentParser(description=description)
 	parser.add_argument('--k_Start',
 						type=positive_integer,
