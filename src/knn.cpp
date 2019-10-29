@@ -2,7 +2,7 @@
 //#include <chrono>
 #include <iostream>
 #include "knn.h"
-#include <limits>  
+#include <limits>
 #include <queue>
 using namespace std;
 
@@ -14,116 +14,78 @@ KNNClassifier::KNNClassifier(unsigned int n_neighbors)
 
 void KNNClassifier::fit(SparseMatrix X, Matrix y)
 {
-	
 	matrizX = X;
 	matrizY = y;
-
-
-
 }
 
 
 Vector KNNClassifier::predict(SparseMatrix X)
 {
-	// Creamos vector columna a devolver
-	auto ret = Vector(X.rows());
+	auto result = Vector(X.rows());
 
+	for (int i = 0; i < X.rows(); i++)
+		result(i) = predecirFila(X, i);
 
-
-	//Creamos arreglo para guardar las filas
-
-
-	//Predecimos el resultado para cada fila
-	for(int i = 0; i < X.rows(); i++)
-	{ 
-		
-		ret(i) = predecirFila(X, i);
-		//printf("%d\n",i );
-	}
-
-	return ret;
+	return result;
 }
 
-//SparseMatrix<double>::InnerIterator it(mat,k)
-
-//int k, SparseMatrix X,
 bool KNNClassifier::predecirFila(SparseMatrix &X, int fila){
-
-
-	priority_queue<cercano> queue; 
+	// min heap para almacenar las distancias, asociadas con la reseña
+	priority_queue<cercano> queue;
 
 	double distancia;
-	//Para cada fila de la matriz de practica
-	for(int k = 0 ; k < matrizX.outerSize(); k++){
+
+	// calculamos la distancia a cada fila de la matriz
+	for (uint i = 0; i < matrizX.outerSize(); i++) {
 		distancia = 0;
-		//Calculo distancia con la fila de la matriz de test
-		SparseMatrix::InnerIterator it(X, fila); 
-		SparseMatrix::InnerIterator it_interno(matrizX,k);
 
+		// SparseMatrix::InnerIterator itera las columnas existentes
+		SparseMatrix::InnerIterator it_train(matrizX, i);
+		SparseMatrix::InnerIterator it_test(X, fila);
 
-		//Recorro ambos iteradores hasta el final
-		while(it && it_interno){
-
-			//Mientras el indice de it es menor entonces no existe ese indice en la otra matriz por lo tanto su valor es 0
-			while(it.index() < it_interno.index()){
-
-				//En este caso la distancia de 0 a it.value  = it.value
-				distancia += abs(it.value());
-				++it;
-
-			}
-			//Mismo que anterior pero con indices al revez
-			while(it_interno.index() < it.index()){
-				distancia += abs(it_interno.value());
-				++it_interno;
-
+		// vamos a ir sumando prograsivamente por los indices existentes
+		while (it_test && it_train) {
+			// si el indice de train es menor que el de test
+			while (it_train.index() < it_test.index()) {
+				distancia += pow(it_train.value(), 2);
+				++it_train;
 			}
 
-			//Si los indices son iguales, la distancia es igual al absoluto de la resta entre ambos valores
-			if(it && it_interno &&  it_interno.index() == it.index() ){
-				distancia += abs( (it.value()-it_interno.value()) );
-				++it_interno;
-				++it;
+			// si el indice de test es menor que el de train
+			while (it_test.index() < it_train.index()) {
+				distancia += pow(it_test.value(), 2);
+				++it_test;
+			}
 
+			// si los indices son iguales
+			if (it_test && it_train && it_train.index() == it_test.index()) {
+				distancia += pow(it_test.value() - it_train.value(), 2);
+				++it_test;
+				++it_train;
 			}
 		}
 
-
-
-
 		//Agregado a priority queue
 		cercano a;
-		a.distancia = distancia;
-		a.resenia = matrizY(0,k);
+		a.distancia = sqrt(distancia);
+		a.resenia = matrizY(0, i);
 		queue.push(a);
-
 	}
-
 
 	unsigned int positivas = 0;
-	for(unsigned int i = 0; i < k; i++){
-		if(queue.empty()){
+
+	// obtenemos los k mas cercanos
+	for (unsigned int i = 0; i < k; i++)
+		if (queue.empty())
 			cerr << "Error cola vacia: K es mayor a cantidad de filas " << endl;
-		}else{
+		else {
 			cercano a = queue.top();
-			if(a.resenia){
+
+			if (a.resenia)
 				positivas++;
-			}
 
 			queue.pop();
-			cout << "distancia:" << k << " "<<a.distancia << endl;
-		}	
+		}
 
-
-	}
-
-	if(positivas >= k/2){
-		return true;
-	}else{
-		return false;
-	}
-
-
+	return positivas * 2 >= k;
 }
- 
-
