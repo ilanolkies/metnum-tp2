@@ -41,6 +41,13 @@ En `notebooks/` hay ejemplos para correr partes del TP usando sklearn y usando l
 curl https://pyenv.run | bash
 ```
 
+```
+export PATH="/home2/clinux01/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+```
+
 Luego, se sugiere agregar unas líneas al bashrc. Hacer eso, **REINICIAR LA CONSOLA** y luego...
 
 ```

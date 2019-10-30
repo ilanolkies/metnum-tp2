@@ -22,7 +22,7 @@ def get_instances(df, max_df=0.90, min_df=0.01):
   text_test = df[df.type == 'test']["review"]
   label_test = df[df.type == 'test']["label"]
 
-  vectorizer = CountVectorizer(max_df=max_df, min_df=min_df, max_features=5000)
+  vectorizer = CountVectorizer(max_df=max_df, min_df=min_df, max_features=200)
 
   vectorizer.fit(text_train)
 
@@ -35,13 +35,15 @@ def main(args):
   # datasets de train y test
   df = pd.read_csv("data/imdb_small.csv")
 
-  x_poda_frec = np.arange(args.from, args.to, args.step)
+  x_poda_frec = np.arange(args._from, args.to, args.step)
   y_poda_frec = []
+
+  df = df[:6000]
 
   for i in x_poda_frec:
     X_train, y_train, X_test, y_test = get_instances(df, 0.9, i)
 
-    k = 10
+    k = 500
     alpha = 50
 
     #pca
@@ -60,15 +62,15 @@ def main(args):
 
   fig, ax1 = plt.subplots()
 
-  plt.plot(x_poda_frec, y_poda_frec, label='k = 10, alpha = 50'.format(k_range[i]))
+  plt.plot(x_poda_frec, y_poda_frec, label='k = 500, alpha = 50'.format(k))
   plt.xlabel('min_df')
   plt.ylabel('accuaracy')
   plt.legend()
   plt.savefig('results/min_df_accuaracy-{}'.format(time.strftime("%Y%m%d-%H%M%S")))
   plt.show()
 
-def positive_integer(value):
-  ivalue = int(value)
+def float_val(value):
+  ivalue = float(value)
   if ivalue < 0:
     raise argparse.ArgumentTypeError("%s Valor inválido, tiene que ser un numero natural." % value)
   return ivalue
@@ -79,21 +81,21 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser(description=description)
 
   parser.add_argument(
-    '--from',
-    type=positive_integer,
-    default=40,
+    '--_from',
+    type=float_val,
+    default=0,
     help='Valor minimo de poda de frecuentes'
   )
   parser.add_argument(
     '--to',
-    type=positive_integer,
-    default=200,
+    type=float_val,
+    default=0.6,
     help='Valor maximo de poda de frecuentes'
   )
   parser.add_argument(
     '--step',
-    type=positive_integer,
-    default=10,
+    type=float_val,
+    default=0.025,
     help='Salto de poda de frecuentes'
   )
   args = parser.parse_args()

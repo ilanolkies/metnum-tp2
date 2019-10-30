@@ -63,20 +63,18 @@ def main(args):
     # kNN
     for i in range(len(k_range)):
       k = k_range[i]
-      t = 0
 
-      for i in range(reps):
-        clf = KNNClassifier(k)
-        clf.fit(X_train, y_train)
-        y_pred = clf.predict(X_test)
-        t += accuracy_score(y_test, y_pred)
+      clf = KNNClassifier(k)
+      clf.fit(X_train, y_train)
+      y_pred = clf.predict(X_test)
+      t = accuracy_score(y_test, y_pred)
 
-      results[i].append(t/reps)
+      results[i].append(t)
 
   for i, result in enumerate(results):
     plt.plot(alpha_range, result, label='k = {0}'.format(k_range[i]))
 
-  plt.xlabel('k')
+  plt.xlabel('alpha')
   plt.ylabel('accuaracy')
   plt.legend()
   plt.savefig('results/k_vs_accuaracy-{}'.format(time.strftime("%Y%m%d-%H%M%S")))
@@ -108,13 +106,13 @@ if __name__ == '__main__':
   parser.add_argument(
     '--k_Start',
     type=positive_integer,
-    default=1,
+    default=20,
     help='Valor minimo de k'
   )
   parser.add_argument(
     '--k_Stop',
     type=positive_integer,
-    default=50,
+    default=41,
     help='Valor maximo de k'
   )
   parser.add_argument(
@@ -126,19 +124,19 @@ if __name__ == '__main__':
   parser.add_argument(
     '--alpha_Start',
     type=positive_integer,
-    default=0,
+    default=50,
     help='Valor minimo de alpha'
   )
   parser.add_argument(
     '--alpha_Stop',
     type=positive_integer,
-    default=50,
+    default=201,
     help='Valor maximo de alpha'
   )
   parser.add_argument(
     '--alpha_Step',
     type=positive_integer,
-    default=10,
+    default=30,
     help='Salto de alpha'
   )
   parser.add_argument(
